@@ -30,6 +30,7 @@ jobs:                                 # Job 설정
         run: npm run build
 
       - name: Deploy # S3에 배포하기
+        working-directory: ./app
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -37,4 +38,4 @@ jobs:                                 # Job 설정
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            build s3://junukim-dev-maketoon # 자신의 레포지토리로 변경해주세요.
+            dist s3://junukim-dev-maketoon
