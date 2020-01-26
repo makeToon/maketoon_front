@@ -1,0 +1,8 @@
+{
+  "git.ignoreLimitWarning": true,
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "eslint.autoFixOnSave": true,
+  "prettier.tslintIntegration": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib"
+}

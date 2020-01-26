@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "target": "es2015", // build된 파일의 버전 체크
+    "jsx": "react",
+    "baseUrl": "./",
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types", "src/@types"], // type들의 경로를 표시.
+    "paths": {
+      "src/*": ["src/*"],
+      "page/*": ["src/page/*"],
+      "components/*": ["src/components/*"],
+      "container/*": ["src/container/*"],
+      "assets/*": ["src/assets/*"],
+      "data/*": ["src/data/*"],
+      "actions/*": ["src/data/actions/*"],
+      "reducers/*": ["src/data/reducers/*"],
+      "middleware/*": ["src/data/middleware/*"],
+      "utils/*": ["src/utils/*"]
+    }
+  },
+  "include": ["./src/**/*.tsx", "./src/@types/**/*.d.ts"], // build시킬 파일 경로 (src의 모든 폴더의 모든 ts 파일)
+  "exclude": ["node_modules", "**/*.spec.ts"] // build에서 제외시킬 파일 경로 (nodeModules와 폴더별 spec.ts 파일)
+}
