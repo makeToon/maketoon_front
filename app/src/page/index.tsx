@@ -6,6 +6,7 @@ import { useAuthRedux } from "container/auth";
 import { getTokenToStorage } from "utils/stroage";
 import GlobalStyle from "../styles/GlobalStyle";
 import { Main, Auth } from "container/index";
+import CheckToken from "components/common/pageFilter/CheckToken";
 
 const App: FC = () => {
   const didMountRef = useRef(false);
@@ -28,7 +29,11 @@ const App: FC = () => {
       <GlobalStyle />
       <Switch>
         <Route path="/" render={() => <Auth />} exact />
-        <Route path="/comics" render={() => <Main />} exact />
+        <CheckToken>
+          <>
+            <Route path="/comics" render={() => <Main />} exact />
+          </>
+        </CheckToken>
       </Switch>
     </BrowserRouter>
   );
