@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import FacebookLogin from "react-facebook-login";
 
@@ -7,11 +7,20 @@ import { Logo } from "assets/index";
 import * as S from "./style";
 
 const Login: FC = () => {
+  const didMountRef = useRef(false);
   const { push } = useHistory();
   const {
     authStore: { accessToken },
     authReducer: { login }
   } = useAuthRedux();
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      document.title = "makeToon - 로그인";
+    }
+  }, [didMountRef]);
 
   useEffect(() => {
     if (accessToken !== "") {
