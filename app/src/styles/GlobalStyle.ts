@@ -7,6 +7,15 @@ import {
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
   @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
   
+  ::-moz-selection {
+    background: #c5c5c5;
+    color: #000;
+  }
+  ::selection {
+    background: #c5c5c5;
+    color: #000;
+  }
+
   html, body {
     width: 100%;
     min-width: 1024px;
