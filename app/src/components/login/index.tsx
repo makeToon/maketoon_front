@@ -15,7 +15,7 @@ const Login: FC = () => {
 
   useEffect(() => {
     if (accessToken !== "") {
-      push("/coimcs");
+      push("/comics");
     }
   }, [accessToken]);
 
