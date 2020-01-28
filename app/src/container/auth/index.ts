@@ -13,12 +13,16 @@ import { AccessToken, LoginResponseType } from "middleware/api/apiTypes";
 
 interface StoreProps {
   accessToken: string;
+  name: string;
+  pictureUrl: string;
 }
 
 export const useAuthRedux = () => {
   const dispatch = useDispatch();
   const authStore = useSelector<AppState, StoreProps>(state => ({
-    accessToken: state.auth.accessToken
+    accessToken: state.auth.accessToken,
+    name: state.auth.name,
+    pictureUrl: state.auth.pictureUrl
   }));
 
   const setToken = useCallback(
