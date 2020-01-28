@@ -5,11 +5,12 @@ import {
 } from "styled-components";
 
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
-  /* css initialize */
+  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  
   html, body {
     width: 100%;
     min-width: 1024px;
-    font-family: "Font";
+    font-family: 'Noto Sans KR', sans-serif;
   }
   input {
     &:-webkit-autofill {
@@ -75,14 +76,15 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
       background: rgb(160, 160, 160);
     }
   }
-  .rotate{
-    transform: rotate(180deg);
-  }
-  
-  .btn{
-    display: inline-block;
-    transition: 0.5s;
-  }
 `;
+
+export const COLORS = {
+  main1: "#f9f9f9" as const,
+  main2: "#d0d0d0" as const,
+  main3: "#a0a0a0" as const,
+  serve1: "#c15fff" as const,
+  serve2: "#9e4bd2" as const,
+  serve3: "#7639a2" as const
+};
 
 export default GlobalStyle;
