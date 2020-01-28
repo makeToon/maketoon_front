@@ -1,3 +1,4 @@
 import Main from "./main";
+import Auth from "./auth";
 
-export { Main };
+export { Main, Auth };
