@@ -22,3 +22,9 @@ declare module "*.ttf" {
   const value: any;
   export default value;
 }
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    FACEBOOK_APP_KEY: string;
+  }
+}
