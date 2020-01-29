@@ -2,7 +2,7 @@ import React, { FC, useCallback, useRef, useEffect } from "react";
 
 import * as S from "./style";
 
-interface OwnProps {
+export interface OwnProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
@@ -45,7 +45,7 @@ const Modal: FC<OwnProps> = ({ isOpen, setIsOpen, children }) => {
   }, [isOpen]);
 
   return (
-    <S.Wrapper onClick={setCloseHandler}>
+    <S.Wrapper className="wrapper" onClick={setCloseHandler}>
       <div onClick={e => e.stopPropagation()}>{children}</div>
     </S.Wrapper>
   );
