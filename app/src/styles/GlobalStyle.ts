@@ -93,7 +93,9 @@ export const COLORS = {
   main3: "#a0a0a0" as const,
   serve1: "#c15fff" as const,
   serve2: "#9e4bd2" as const,
-  serve3: "#7639a2" as const
+  serve3: "#7639a2" as const,
+  fill: "#d2d2d2" as const,
+  stroke: "#ffffff" as const
 };
 
 export default GlobalStyle;
