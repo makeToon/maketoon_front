@@ -11,3 +11,18 @@ export const suddenMotion = keyframes`
     opacity: 1;
   }
 `;
+
+export const downToUp = keyframes`
+  0% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+  80% {
+    transform: translateY(-20px);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
