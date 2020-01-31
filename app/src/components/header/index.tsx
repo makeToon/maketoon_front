@@ -14,7 +14,7 @@ const Header: FC = () => {
     <S.Wrapper>
       <div>
         <S.LogoLabel>
-          <Link to="/comics">
+          <Link to="/photomap">
             <img src={Logo} alt="로고" />
           </Link>
         </S.LogoLabel>
