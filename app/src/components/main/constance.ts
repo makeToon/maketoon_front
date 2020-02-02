@@ -55,9 +55,6 @@ export const DESCRIPTION = [
     top: "650px",
     right: "-240px",
     title: "Step_7 Contact",
-    description: [
-      "junukim.dev@/gmail.com으로/문의남겨주세요.",
-      "이용해주셔서 감사합니다."
-    ]
+    description: ["junukim.dev@/gmail.com으로/문의남겨주세요."]
   }
 ];
