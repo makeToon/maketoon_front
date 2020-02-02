@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import { COLORS } from 'src/styles/GlobalStyle';
+import { COLORS } from "src/styles/GlobalStyle";
 
 export const Path = styled.path`
   cursor: pointer;
