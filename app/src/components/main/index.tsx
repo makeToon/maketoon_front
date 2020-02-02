@@ -1,14 +1,15 @@
-import React, { FC, useRef, useEffect } from "react";
+import React, { FC, useRef, useState, useEffect } from "react";
 
 import * as S from "./style";
 import Header from "components/header";
-import Icon from "assets/map/index.tsx";
+import Map from "assets/map/index.tsx";
 import PanAndZoom from "components/common/panAndZoom";
 import { COLORS } from "src/styles/GlobalStyle";
 import Descriptions from "./Descriptions";
 
 const Main: FC = () => {
   const didMountRef = useRef(false);
+  const [area, setArea] = useState("");
 
   useEffect(() => {
     if (!didMountRef.current) {
@@ -21,14 +22,18 @@ const Main: FC = () => {
   return (
     <S.Wrapper>
       <Header />
-      <div>
+      <section>
         <S.MapContainer>
           <Descriptions />
-          <PanAndZoom width="510px" height="720px">
-            <Icon fillColor={COLORS.fill} strokeColor={COLORS.stroke} />
+          <PanAndZoom displayText={area} width="510px" height="720px">
+            <Map
+              setArea={setArea}
+              fillColor={COLORS.fill}
+              strokeColor={COLORS.stroke}
+            />
           </PanAndZoom>
         </S.MapContainer>
-      </div>
+      </section>
     </S.Wrapper>
   );
 };

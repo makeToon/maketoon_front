@@ -4,7 +4,7 @@ import { COLORS } from "src/styles/GlobalStyle";
 import { downToUp } from "src/styles/animtaion";
 
 export const Wrapper = styled.div`
-  > div {
+  > section {
     min-width: 514px;
     width: 100%;
     height: calc(100vh - 80px);
@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
 
 export const MapContainer = styled.div`
   position: relative;
+  height: fit-content;
 `;
 
 interface DescriptionAreaProps {
