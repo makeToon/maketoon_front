@@ -26,7 +26,12 @@ const Main: FC = () => {
       <section>
         <S.MapContainer>
           <Descriptions />
-          <PanAndZoom displayText={area} width="510px" height="720px">
+          <PanAndZoom
+            setDisplayName={setArea}
+            displayText={area}
+            width="510px"
+            height="720px"
+          >
             <S.MapNames src={MapName} alt="MapNames" />
             <Map
               setArea={setArea}

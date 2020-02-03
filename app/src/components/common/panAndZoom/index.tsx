@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useEffect, useCallback } from "react";
+import React, { FC, useState, useMemo, useEffect, useCallback } from "react";
 
 import * as S from "./style";
 import AreaDisplayBox from "./AreaDisplayBox";
@@ -7,13 +7,23 @@ interface OwnProps {
   width: string;
   height: string;
   displayText: string;
+  setDisplayName: (displayText: string) => void;
 }
 
-const PanAndZoom: FC<OwnProps> = ({ width, height, displayText, children }) => {
-  const [offset, setOffset] = React.useState({ left: 0, top: 0 });
-  const [lastMousePosition, setLastMousePosition] = React.useState(null);
-  const [isDragging, setIsDragging] = React.useState(false);
-  const [zoomLevel, setZoomLevel] = React.useState(-1);
+let milliseconds = 0;
+
+const PanAndZoom: FC<OwnProps> = ({
+  width,
+  height,
+  displayText,
+  setDisplayName,
+  children
+}) => {
+  const [offset, setOffset] = useState({ left: 0, top: 0 });
+  const [lastMousePosition, setLastMousePosition] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(-1);
+  const [isTimeout, setIsTimeout] = useState(false);
 
   useEffect(() => {
     if (
@@ -29,6 +39,13 @@ const PanAndZoom: FC<OwnProps> = ({ width, height, displayText, children }) => {
 
   const onMouseDown = useCallback(e => {
     setIsDragging(true);
+    setDisplayName("");
+
+    if (milliseconds === 0) {
+      setIsTimeout(false);
+    }
+
+    milliseconds = +new Date();
 
     const { clientX, clientY } = e;
 
@@ -40,7 +57,15 @@ const PanAndZoom: FC<OwnProps> = ({ width, height, displayText, children }) => {
 
   const onMouseUp = useCallback(() => {
     setIsDragging(false);
-  }, []);
+
+    if (+new Date() - milliseconds >= 200) {
+      setIsTimeout(false);
+    } else {
+      setIsTimeout(true);
+    }
+
+    milliseconds = 0;
+  }, [milliseconds]);
 
   const onMouseMove = useCallback(
     e => {
@@ -117,7 +142,7 @@ const PanAndZoom: FC<OwnProps> = ({ width, height, displayText, children }) => {
       onMouseMove={onMouseMove}
       onWheel={onWheel}
     >
-      {displayText && (
+      {isTimeout && displayText && (
         <AreaDisplayBox
           lastMousePosition={lastMousePosition}
           displayText={displayText}
