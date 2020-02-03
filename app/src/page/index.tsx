@@ -15,6 +15,7 @@ const App: FC = () => {
         <CheckToken>
           <>
             <Route path="/photomap" render={() => <Main />} exact />
+            <Route path="/photo/:area" render={() => <div />} exact />
           </>
         </CheckToken>
       </Switch>
