@@ -1,4 +1,5 @@
 import React, { FC, useMemo } from "react";
+import { Link } from "react-router-dom";
 
 import * as S from "./style";
 
@@ -15,7 +16,7 @@ const AreaDisplayBox: FC<OwnProps> = ({ lastMousePosition, displayText }) => {
 
     const wrapperPosition = { x: document.body.clientWidth / 2 - 257, y: 120 };
     const widthSizeHalf = 80;
-    const heightSize = 38;
+    const heightSize = 78;
 
     return {
       left: `${lastMousePosition.clientX -
@@ -28,6 +29,17 @@ const AreaDisplayBox: FC<OwnProps> = ({ lastMousePosition, displayText }) => {
   return (
     <S.AreaDisplayBox style={AreaDisplayBoxPosition}>
       {displayText}
+      <div>
+        <Link
+          onMouseDown={e => e.stopPropagation()}
+          onMouseUp={e => e.stopPropagation()}
+          onMouseMove={e => e.stopPropagation()}
+          to={`/photo/${displayText}`}
+        >
+          사진 추가
+        </Link>
+        <button>취소</button>
+      </div>
     </S.AreaDisplayBox>
   );
 };

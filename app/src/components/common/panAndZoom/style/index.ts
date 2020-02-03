@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { COLORS } from "src/styles/GlobalStyle";
+
 interface WrapperProps {
   width: string;
   height: string;
@@ -20,10 +22,49 @@ export const AreaDisplayBox = styled.div`
   background: #fff;
   color: #000;
   width: 160px;
-  height: 28px;
+  height: 68px;
+  font-size: 14px;
   top: -9999px;
-  text-align: center;
-  line-height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  box-sizing: border-box;
+  cursor: default;
+
+  > div {
+    > button,
+    a {
+      all: unset;
+      height: 32px;
+      padding: 5px;
+      box-sizing: border-box;
+      cursor: pointer;
+      text-align: center;
+      border-radius: 2px;
+      color: #000;
+      transition: 0.2s;
+    }
+
+    > a {
+      border: 1px solid ${COLORS.serve3};
+      margin-right: 8px;
+
+      &:hover {
+        background: ${COLORS.serve2};
+        color: #fff;
+      }
+    }
+    > button {
+      border: 1px solid red;
+
+      &:hover {
+        background: red;
+        color: #fff;
+      }
+    }
+  }
 
   &::after,
   &::before {
