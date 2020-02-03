@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
+import change_map from "assets/change_map.png";
+import RealMaps from "assets/realMap.jpg";
 import { COLORS } from "src/styles/GlobalStyle";
-import { downToUp } from "src/styles/animtaion";
+import { downToUp, suddenMotion } from "src/styles/animtaion";
 
 export const Wrapper = styled.div`
   > section {
@@ -17,6 +19,7 @@ export const Wrapper = styled.div`
 `;
 
 export const MapContainer = styled.div`
+  animation: ${suddenMotion} 0.8s;
   position: relative;
   height: fit-content;
 `;
@@ -61,4 +64,12 @@ export const DescriptionArea = styled.div<DescriptionAreaProps>`
       margin-left: 10px;
     }
   }
+`;
+
+export const MapNames = styled.img`
+  position: absolute;
+  width: 528px;
+  z-index: 9;
+  pointer-events: none;
+  user-select: none;
 `;

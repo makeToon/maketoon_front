@@ -1,11 +1,12 @@
 import React, { FC, useRef, useState, useEffect } from "react";
 
 import * as S from "./style";
-import Header from "components/header";
-import Map from "assets/map/index.tsx";
-import PanAndZoom from "components/common/panAndZoom";
 import { COLORS } from "src/styles/GlobalStyle";
+import Header from "components/header";
+import PanAndZoom from "components/common/panAndZoom";
 import Descriptions from "./Descriptions";
+import Map from "assets/map/index.tsx";
+import { MapName } from "assets/index.ts";
 
 const Main: FC = () => {
   const didMountRef = useRef(false);
@@ -26,6 +27,7 @@ const Main: FC = () => {
         <S.MapContainer>
           <Descriptions />
           <PanAndZoom displayText={area} width="510px" height="720px">
+            <S.MapNames src={MapName} alt="MapNames" />
             <Map
               setArea={setArea}
               fillColor={COLORS.fill}
