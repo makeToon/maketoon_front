@@ -15,6 +15,7 @@ const App: FC = () => {
         <CheckToken>
           <>
             <Route path="/comics" render={() => <Main />} exact />
+            <Route path="/photo/:area" render={() => <div />} exact />
           </>
         </CheckToken>
       </Switch>
