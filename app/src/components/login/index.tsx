@@ -24,7 +24,7 @@ const Login: FC = () => {
 
   useEffect(() => {
     if (accessToken !== "") {
-      push("/comics");
+      push("/photomap");
     }
   }, [accessToken]);
 
