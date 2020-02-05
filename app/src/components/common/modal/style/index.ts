@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ width?: string; height?: string }>`
   width: 100%;
   height: 100vh;
   position: absolute;
@@ -11,10 +11,11 @@ export const Wrapper = styled.div`
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
   transition: 0.2s;
+  z-index: 1000;
 
   > div {
-    width: 800px;
-    height: 500px;
+    width: ${({ width }) => (width ? width : "800px")};
+    height: ${({ height }) => (height ? height : "500px")};
     background: #f5f9fc;
   }
 `;
