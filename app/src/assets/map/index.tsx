@@ -1,6 +1,7 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useEffect, useRef } from "react";
 
 import * as S from "./style";
+import { usePhotoRedux } from "container/photo";
 
 interface OwnProps {
   fillColor: string;
@@ -17,14 +18,28 @@ const SvgComponent: FC<OwnProps> = ({
   width = 509,
   height = 716.105
 }) => {
+  const didMountRef = useRef(false);
+  const {
+    photoStore: { accessToken, mapPhotos },
+    photoReducer: { getMapPhotos }
+  } = usePhotoRedux();
+
   const setAreaHandler = useCallback((area: string) => {
     setArea(area);
+  }, []);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      getMapPhotos({ accessToken });
+    }
   }, []);
 
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        {[].map((d, i) => (
+        {mapPhotos.map((d, i) => (
           <pattern
             key={i.toString()}
             id={`imgpattern_${d.area}`}
