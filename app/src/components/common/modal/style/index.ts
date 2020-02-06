@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { downToUp } from "src/styles/animtaion";
+
 export const Wrapper = styled.div<{ width?: string; height?: string }>`
   width: 100%;
   height: 100vh;
@@ -14,6 +16,7 @@ export const Wrapper = styled.div<{ width?: string; height?: string }>`
   z-index: 1000;
 
   > div {
+    animation: ${downToUp} 0.6s;
     width: ${({ width }) => (width ? width : "800px")};
     height: ${({ height }) => (height ? height : "500px")};
     background: #f5f9fc;
