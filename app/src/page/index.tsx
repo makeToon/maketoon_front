@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader/root";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import GlobalStyle from "../styles/GlobalStyle";
-import { Main, Auth } from "container/index";
+import { Main, Auth, PhotoArea } from "components/index";
 import CheckToken from "components/common/pageFilter/CheckToken";
 
 const App: FC = () => {
@@ -15,7 +15,7 @@ const App: FC = () => {
         <CheckToken>
           <>
             <Route path="/photomap" render={() => <Main />} exact />
-            <Route path="/photo/:area" render={() => <div />} exact />
+            <Route path="/photo/:area" render={() => <PhotoArea />} exact />
           </>
         </CheckToken>
       </Switch>

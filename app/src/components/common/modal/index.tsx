@@ -5,6 +5,8 @@ import * as S from "./style";
 export interface OwnProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  width?: string;
+  height?: string;
 }
 
 /*
@@ -13,7 +15,13 @@ export interface OwnProps {
  * - root 바로 아래 하나의 컴포넌트와 함께 modal 생성.
  */
 
-const Modal: FC<OwnProps> = ({ isOpen, setIsOpen, children }) => {
+const Modal: FC<OwnProps> = ({
+  isOpen,
+  setIsOpen,
+  width,
+  height,
+  children
+}) => {
   const didMountRef = useRef(false);
 
   const setCloseHandler = useCallback(() => {
@@ -45,7 +53,12 @@ const Modal: FC<OwnProps> = ({ isOpen, setIsOpen, children }) => {
   }, [isOpen]);
 
   return (
-    <S.Wrapper className="wrapper" onClick={setCloseHandler}>
+    <S.Wrapper
+      width={width}
+      height={height}
+      className="wrapper"
+      onClick={setCloseHandler}
+    >
       <div onClick={e => e.stopPropagation()}>{children}</div>
     </S.Wrapper>
   );

@@ -19,7 +19,7 @@ export const downToUp = keyframes`
   }
   80% {
     transform: translateY(-20px);
-    opacity: 0.4;
+    opacity: 0.9;
   }
   100% {
     transform: translateY(0px);
