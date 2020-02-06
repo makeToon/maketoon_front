@@ -1,18 +1,38 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 
 import * as S from "./style";
 import Modal from "components/common/modal";
+import { usePhotoRedux } from "container/photo";
 
 interface OwnProps {
+  photo: File;
   area: string;
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
 }
 
-const CheckModal: FC<OwnProps> = ({ area, isModalOpen, setIsModalOpen }) => {
+const CheckModal: FC<OwnProps> = ({
+  photo,
+  area,
+  isModalOpen,
+  setIsModalOpen
+}) => {
+  const {
+    photoStore: { accessToken, putCropPhotoStatus },
+    photoReducer: { putCropPhoto, resetStatus }
+  } = usePhotoRedux();
+
   const setCloseHandler = useCallback(() => {
     setIsModalOpen(false);
   }, [isModalOpen]);
+
+  useEffect(() => {
+    if (putCropPhotoStatus === 200) {
+      setCloseHandler();
+    }
+
+    resetStatus();
+  }, [putCropPhotoStatus]);
 
   return (
     <Modal
@@ -29,7 +49,12 @@ const CheckModal: FC<OwnProps> = ({ area, isModalOpen, setIsModalOpen }) => {
         </h1>
 
         <div>
-          <button className="yes">예</button>
+          <button
+            onClick={() => putCropPhoto({ accessToken, photo, area })}
+            className="yes"
+          >
+            예
+          </button>
           <button onClick={setCloseHandler} className="no">
             아니오
           </button>

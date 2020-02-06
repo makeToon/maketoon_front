@@ -5,12 +5,17 @@ import * as S from "./style";
 
 interface OwnProps {
   setCroppedImageUrl: (croppedImageUrl: string) => void;
+  setPhoto: (photo: File) => void;
   inputWidth?: string;
 }
 
 let fileUrl = "";
 
-const ImageCrop: FC<OwnProps> = ({ setCroppedImageUrl, inputWidth }) => {
+const ImageCrop: FC<OwnProps> = ({
+  setCroppedImageUrl,
+  setPhoto,
+  inputWidth
+}) => {
   const imageRef = useRef(null);
   const [src, setSrc] = useState(null);
   const [crop, setCrop] = useState({
@@ -22,6 +27,8 @@ const ImageCrop: FC<OwnProps> = ({ setCroppedImageUrl, inputWidth }) => {
   const onSelectFile = useCallback(
     ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
       if (files && files.length > 0) {
+        setPhoto(files[0]);
+
         const reader = new FileReader();
         reader.addEventListener("load", () => {
           setSrc(reader.result);
