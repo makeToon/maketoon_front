@@ -13,6 +13,7 @@ const PhotoArea: FC = () => {
   const didMountRef = useRef(false);
   const [croppedImageUrl, setCroppedImageUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [photo, setPhoto] = useState<File>(null);
 
   useEffect(() => {
     if (!didMountRef.current) {
@@ -30,6 +31,7 @@ const PhotoArea: FC = () => {
     <>
       {isModalOpen && (
         <CheckModal
+          photo={photo}
           area={area}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
@@ -40,7 +42,10 @@ const PhotoArea: FC = () => {
         <section>
           <button onClick={goBackHandler}>뒤로가기</button>
           <S.PhotoAreaDivision>
-            <ImageCropCover setCroppedImageUrl={setCroppedImageUrl} />
+            <ImageCropCover
+              setPhoto={setPhoto}
+              setCroppedImageUrl={setCroppedImageUrl}
+            />
             {croppedImageUrl && (
               <CroppedImageCover
                 setIsModalOpen={setIsModalOpen}
