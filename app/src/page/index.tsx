@@ -1,17 +1,23 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import React, { FC } from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import GlobalStyle from "../styles/GlobalStyle";
-import { Main } from "container/index";
+import { Main, Auth, PhotoArea } from "components/index";
+import CheckToken from "components/common/pageFilter/CheckToken";
 
 const App: FC = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
       <Switch>
-        <Route path="/" render={() => <Main />} exact />
+        <Route path="/" render={() => <Auth />} exact />
+        <CheckToken>
+          <>
+            <Route path="/photomap" render={() => <Main />} exact />
+            <Route path="/photo/:area" render={() => <PhotoArea />} exact />
+          </>
+        </CheckToken>
       </Switch>
     </BrowserRouter>
   );

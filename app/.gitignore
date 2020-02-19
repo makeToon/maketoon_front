@@ -1,3 +1,7 @@
 .history
 
 node_modules
+
+.env
+
+__snapshots__
