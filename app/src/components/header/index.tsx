@@ -5,9 +5,13 @@ import { useAuthRedux } from "container/auth";
 import { Logo } from "assets/index";
 import * as S from "./style";
 
-const Header: FC = () => {
+interface OwnProps {
+  photoArea?: string;
+}
+
+const Header: FC<OwnProps> = ({ photoArea }) => {
   const {
-    authStore: { name, pictureUrl }
+    authStore: { name, pictureUrl },
   } = useAuthRedux();
 
   return (
@@ -15,7 +19,7 @@ const Header: FC = () => {
       <div>
         <S.LogoLabel>
           <Link to="/photomap">
-            <img src={Logo} alt="로고" />
+            {photoArea ? <p>{photoArea} ↩︎</p> : <img src={Logo} alt="로고" />}
           </Link>
         </S.LogoLabel>
         <S.UserLabel>

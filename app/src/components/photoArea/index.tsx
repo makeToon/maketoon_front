@@ -38,9 +38,8 @@ const PhotoArea: FC = () => {
         />
       )}
       <S.Wraapper>
-        <Header />
+        <Header photoArea={area} />
         <section>
-          <button onClick={goBackHandler}>뒤로가기</button>
           <S.PhotoAreaDivision>
             <ImageCropCover
               setPhoto={setPhoto}
