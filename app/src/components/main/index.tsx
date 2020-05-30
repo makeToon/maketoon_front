@@ -30,7 +30,7 @@ const Main: FC = () => {
             setDisplayName={setArea}
             displayText={area}
             width="510px"
-            height="720px"
+            height="78vh"
           >
             <S.MapNames src={MapName} alt="MapNames" />
             <Map
