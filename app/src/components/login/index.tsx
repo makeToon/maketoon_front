@@ -11,7 +11,7 @@ const Login: FC = () => {
   const { push } = useHistory();
   const {
     authStore: { accessToken },
-    authReducer: { login }
+    authReducer: { login },
   } = useAuthRedux();
 
   useEffect(() => {
@@ -36,13 +36,14 @@ const Login: FC = () => {
           <FacebookLogin
             appId={process.env.FACEBOOK_APP_KEY}
             fields="name,email,picture"
+            autoLoad={true}
             size="small"
             callback={({
               name,
               accessToken,
               picture: {
-                data: { url }
-              }
+                data: { url },
+              },
             }) => login({ name, accessToken, pictureUrl: url })}
           />
         </div>
