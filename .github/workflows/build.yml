@@ -9,7 +9,7 @@ jobs:                                 # Job 설정
     name: hello github action         # Job 이름
     runs-on: ubuntu-18.04             # Job 가상환경 인스턴스
     env:                              # env
-      FACEBOOK_APP_KEY: ${{ FACEBOOK_APP_KEY }}
+      FACEBOOK_APP_KEY: ${{ secrets.FACEBOOK_APP_KEY }}
 
     steps:                            # Steps
       - name: checkout source code    # Step 이름
