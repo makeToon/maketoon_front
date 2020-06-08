@@ -28,6 +28,8 @@ const Login: FC = () => {
     }
   }, [accessToken]);
 
+  console.log(process.env.FACEBOOK_APP_KEY);
+
   return (
     <S.Wrapper>
       <div>
@@ -37,6 +39,7 @@ const Login: FC = () => {
             appId={process.env.FACEBOOK_APP_KEY}
             fields="name,email,picture"
             autoLoad={true}
+            reaunthenticate={true}
             size="small"
             callback={({
               name,
