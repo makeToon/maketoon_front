@@ -29,6 +29,7 @@ interface DescriptionAreaProps {
   left?: string;
   right?: string;
   bottom?: string;
+  zIndex?: number;
   isOpen: boolean;
 }
 export const DescriptionArea = styled.div<DescriptionAreaProps>`
@@ -39,7 +40,9 @@ export const DescriptionArea = styled.div<DescriptionAreaProps>`
   padding: 5px;
   box-sizing: border-box;
   border-radius: 6px;
+  background: ${COLORS.main1};
   border: 1px solid ${COLORS.serve1};
+  z-index: ${({ zIndex }) => zIndex};
   color: ${COLORS.serve3};
   font-weight: bold;
   font-size: 16px;

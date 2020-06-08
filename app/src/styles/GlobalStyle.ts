@@ -1,8 +1,19 @@
 import {
   createGlobalStyle,
   GlobalStyleComponent,
-  DefaultTheme
+  DefaultTheme,
 } from "styled-components";
+
+export const COLORS = {
+  main1: "#f9f9f9" as const,
+  main2: "#d0d0d0" as const,
+  main3: "#a0a0a0" as const,
+  serve1: "#c15fff" as const,
+  serve2: "#9e4bd2" as const,
+  serve3: "#7639a2" as const,
+  fill: "#d2d2d2" as const,
+  stroke: "#ffffff" as const,
+};
 
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
   @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -59,6 +70,9 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     list-style: none;
   }
   a {
+    &:active {
+      color: ${COLORS.serve1};
+    }
     &:link{
       text-decoration: none;
     }
@@ -86,16 +100,5 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     }
   }
 `;
-
-export const COLORS = {
-  main1: "#f9f9f9" as const,
-  main2: "#d0d0d0" as const,
-  main3: "#a0a0a0" as const,
-  serve1: "#c15fff" as const,
-  serve2: "#9e4bd2" as const,
-  serve3: "#7639a2" as const,
-  fill: "#d2d2d2" as const,
-  stroke: "#ffffff" as const
-};
 
 export default GlobalStyle;

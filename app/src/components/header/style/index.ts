@@ -16,8 +16,15 @@ export const Wrapper = styled.header`
 `;
 
 export const LogoLabel = styled.div`
-  > a > img {
-    width: 180px;
+  > a {
+    img {
+      width: 180px;
+    }
+
+    p {
+      font-size: 36px;
+      font-weight: bold;
+    }
   }
 `;
 

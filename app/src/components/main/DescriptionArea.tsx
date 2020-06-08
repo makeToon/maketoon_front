@@ -9,6 +9,7 @@ interface OwnProps {
   left?: string;
   right?: string;
   bottom?: string;
+  zIndex?: number;
 }
 
 const DescriptionArea: FC<OwnProps> = ({
@@ -17,7 +18,8 @@ const DescriptionArea: FC<OwnProps> = ({
   top,
   left,
   right,
-  bottom
+  bottom,
+  zIndex,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -27,7 +29,7 @@ const DescriptionArea: FC<OwnProps> = ({
       ref.current.scrollTo({
         behavior: "smooth",
         left: 0,
-        top: 0
+        top: 0,
       });
     }
 
@@ -42,6 +44,7 @@ const DescriptionArea: FC<OwnProps> = ({
       left={left}
       right={right}
       bottom={bottom}
+      zIndex={zIndex}
       ref={ref}
     >
       {title && <h3>{title}</h3>}

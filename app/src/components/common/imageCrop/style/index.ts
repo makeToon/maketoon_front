@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 
 export const InputCover = styled.label<{ width?: string; isAccept: boolean }>`
   width: ${({ width }) => (width ? width : "500px")};
+  max-width: ${({ width }) => (width ? width : "500px")};
   height: ${({ isAccept }) => (isAccept ? "min-content" : "500px")};
   border: 3px ${({ isAccept }) => (isAccept ? "solid" : "dotted")}
     ${COLORS.serve3};
@@ -41,6 +42,7 @@ export const Crop = styled.div`
   .ReactCrop__image {
     display: block;
     max-width: 100%;
+    max-height: 500px;
     touch-action: manipulation;
   }
   .ReactCrop--crop-invisible .ReactCrop__image {

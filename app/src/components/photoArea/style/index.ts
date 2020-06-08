@@ -78,10 +78,13 @@ export const PhotoAreaDivision = styled.div`
 export const CroppedImageCover = styled.div`
   position: relative;
   margin: 0 100px;
+  height: max-content;
 
   > img {
     border: 3px solid #7639a2;
     padding: 10px;
+    max-width: 280px;
+    max-height: 280px;
   }
 
   &::before,
@@ -111,6 +114,7 @@ export const SubmitCover = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: max-content;
 
   > img {
     width: 300px;
