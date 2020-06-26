@@ -16,7 +16,7 @@ export const COLORS = {
 };
 
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
-  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
   
   ::-moz-selection {
     background: #c5c5c5;

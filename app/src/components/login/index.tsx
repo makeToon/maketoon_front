@@ -28,15 +28,13 @@ const Login: FC = () => {
     }
   }, [accessToken]);
 
-  console.log(process.env.FACEBOOK_APP_KEY);
-
   return (
     <S.Wrapper>
       <div>
         <div>
           <img src={Logo} alt="MakeToonLogo" />
           <FacebookLogin
-            appId={process.env.FACEBOOK_APP_KEY}
+            appId={"178265060063296"}
             fields="name,email,picture"
             autoLoad={true}
             reaunthenticate={true}
