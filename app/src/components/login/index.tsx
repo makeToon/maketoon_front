@@ -45,7 +45,11 @@ const Login: FC = () => {
               picture: {
                 data: { url },
               },
-            }) => login({ name, accessToken, pictureUrl: url })}
+              ...requset
+            }) => {
+              console.log(requset);
+              return login({ name, accessToken, pictureUrl: url });
+            }}
           />
         </div>
         <p>
