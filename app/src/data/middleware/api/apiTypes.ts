@@ -12,6 +12,8 @@ export interface PutCropPhotoRequestType {
   photo: File;
   accessToken: string;
   area: string;
+  width: string;
+  height: string;
 }
 
 export interface MapPhotos {

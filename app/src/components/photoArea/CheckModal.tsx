@@ -8,6 +8,10 @@ interface OwnProps {
   photo: File;
   area: string;
   isModalOpen: boolean;
+  location: {
+    width: number;
+    height: number;
+  };
   setIsModalOpen: (isModalOpen: boolean) => void;
 }
 
@@ -15,11 +19,12 @@ const CheckModal: FC<OwnProps> = ({
   photo,
   area,
   isModalOpen,
-  setIsModalOpen
+  location,
+  setIsModalOpen,
 }) => {
   const {
     photoStore: { accessToken, putCropPhotoStatus },
-    photoReducer: { putCropPhoto, resetStatus }
+    photoReducer: { putCropPhoto, resetStatus },
   } = usePhotoRedux();
 
   const setCloseHandler = useCallback(() => {
@@ -50,7 +55,15 @@ const CheckModal: FC<OwnProps> = ({
 
         <div>
           <button
-            onClick={() => putCropPhoto({ accessToken, photo, area })}
+            onClick={() =>
+              putCropPhoto({
+                accessToken,
+                photo,
+                area,
+                width: String(location.width),
+                height: String(location.height),
+              })
+            }
             className="yes"
           >
             예

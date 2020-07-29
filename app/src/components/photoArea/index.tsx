@@ -14,6 +14,7 @@ const PhotoArea: FC = () => {
   const [croppedImageUrl, setCroppedImageUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [photo, setPhoto] = useState<File>(null);
+  const [location, setLocation] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     if (!didMountRef.current) {
@@ -35,6 +36,7 @@ const PhotoArea: FC = () => {
           area={area}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          location={location}
         />
       )}
       <S.Wraapper>
@@ -44,6 +46,7 @@ const PhotoArea: FC = () => {
             <ImageCropCover
               setPhoto={setPhoto}
               setCroppedImageUrl={setCroppedImageUrl}
+              setLocation={setLocation}
             />
             {croppedImageUrl && (
               <CroppedImageCover

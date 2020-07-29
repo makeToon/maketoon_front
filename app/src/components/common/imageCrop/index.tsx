@@ -5,6 +5,7 @@ import * as S from "./style";
 
 interface OwnProps {
   setCroppedImageUrl: (croppedImageUrl: string) => void;
+  setLocation: ({ width, height }: { width: number; height: number }) => void;
   setPhoto: (photo: File) => void;
   inputWidth?: string;
 }
@@ -14,14 +15,16 @@ let fileUrl = "";
 const ImageCrop: FC<OwnProps> = ({
   setCroppedImageUrl,
   setPhoto,
-  inputWidth
+  inputWidth,
+  setLocation,
 }) => {
   const imageRef = useRef(null);
   const [src, setSrc] = useState(null);
   const [crop, setCrop] = useState({
     unit: "%",
     width: 100000,
-    aspect: 1 / 1
+    height: 0,
+    aspect: 1 / 1,
   });
 
   const onSelectFile = useCallback(
@@ -40,7 +43,7 @@ const ImageCrop: FC<OwnProps> = ({
     []
   );
 
-  const onImageLoaded = useCallback(image => {
+  const onImageLoaded = useCallback((image) => {
     imageRef.current = image;
   }, []);
 
@@ -66,7 +69,7 @@ const ImageCrop: FC<OwnProps> = ({
       );
 
       return new Promise<string>((resolve, reject) => {
-        canvas.toBlob(blob => {
+        canvas.toBlob((blob) => {
           if (!blob) {
             reject(new Error("Canvas is empty"));
           }
@@ -81,7 +84,7 @@ const ImageCrop: FC<OwnProps> = ({
   );
 
   const makeClientCrop = useCallback(
-    async crop => {
+    async (crop) => {
       if (imageRef.current && crop.width && crop.height) {
         const croppedImageUrl = await getCroppedImg(imageRef.current, crop);
         setCroppedImageUrl(croppedImageUrl);
@@ -90,12 +93,13 @@ const ImageCrop: FC<OwnProps> = ({
     [imageRef.current]
   );
 
-  const onCropComplete = crop => {
+  const onCropComplete = (crop) => {
     makeClientCrop(crop);
   };
 
-  const onCropChange = crop => {
+  const onCropChange = (crop) => {
     setCrop(crop);
+    setLocation({ width: crop.width, height: crop.height });
   };
 
   return (
