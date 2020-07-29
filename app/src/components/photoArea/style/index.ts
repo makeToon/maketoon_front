@@ -160,6 +160,21 @@ export const CheckModal = styled.div`
     display: flex;
     justify-content: center;
 
+    > div.loadingWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      > p {
+        color: ${COLORS.serve3};
+      }
+    }
+
+    img.loading {
+      width: 60px;
+      height: 60px;
+    }
+
     button {
       all: unset;
       width: 200px;
