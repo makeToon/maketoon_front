@@ -20,7 +20,7 @@ const PhotoArea: FC = () => {
     if (!didMountRef.current) {
       didMountRef.current = true;
 
-      document.title = `makeToon - '${area}' 포토 설정`;
+      document.title = `makeToon - '${area.split("-")[0]}' 포토 설정`;
     }
   }, [didMountRef]);
 
@@ -40,7 +40,7 @@ const PhotoArea: FC = () => {
         />
       )}
       <S.Wraapper>
-        <Header photoArea={area} />
+        <Header photoArea={area.split("-")[0]} />
         <section>
           <S.PhotoAreaDivision>
             <ImageCropCover

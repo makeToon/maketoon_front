@@ -48,7 +48,7 @@ const CheckModal: FC<OwnProps> = ({
     >
       <S.CheckModal>
         <h1>
-          <span>"{area}"</span>에 해당 이미지를
+          <span>"{area.split("-")[0]}"</span>에 해당 이미지를
           <br />
           등록하시겠습니까?
         </h1>
@@ -59,9 +59,9 @@ const CheckModal: FC<OwnProps> = ({
               putCropPhoto({
                 accessToken,
                 photo,
-                area,
-                width: String(location.width),
-                height: String(location.height),
+                area: area.split("-")[0],
+                width: area.split("-")[1],
+                height: "0",
               })
             }
             className="yes"
