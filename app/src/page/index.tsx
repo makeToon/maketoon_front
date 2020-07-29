@@ -12,12 +12,12 @@ const App: FC = () => {
       <GlobalStyle />
       <Switch>
         <Route path="/" render={() => <Auth />} exact />
-        <CheckToken>
-          <>
-            <Route path="/photomap" render={() => <Main />} exact />
-            <Route path="/photo/:area" render={() => <PhotoArea />} exact />
-          </>
-        </CheckToken>
+        {/* <CheckToken> */}
+        <>
+          <Route path="/photomap" render={() => <Main />} exact />
+          <Route path="/photo/:area" render={() => <PhotoArea />} exact />
+        </>
+        {/* </CheckToken> */}
       </Switch>
     </BrowserRouter>
   );

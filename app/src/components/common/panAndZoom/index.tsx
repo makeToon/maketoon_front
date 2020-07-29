@@ -6,8 +6,11 @@ import AreaDisplayBox from "./AreaDisplayBox";
 interface OwnProps {
   width: string;
   height: string;
-  displayText: string;
-  setDisplayName: (displayText: string) => void;
+  displayText: {
+    area: string;
+    width: number;
+  };
+  setDisplayName: (data: { area: string; width: number }) => void;
 }
 
 let milliseconds = 0;
@@ -17,7 +20,7 @@ const PanAndZoom: FC<OwnProps> = ({
   height,
   displayText,
   setDisplayName,
-  children
+  children,
 }) => {
   const [offset, setOffset] = useState({ left: 0, top: 0 });
   const [lastMousePosition, setLastMousePosition] = useState(null);
@@ -37,9 +40,9 @@ const PanAndZoom: FC<OwnProps> = ({
     }
   }, [zoomLevel]);
 
-  const onMouseDown = useCallback(e => {
+  const onMouseDown = useCallback((e) => {
     setIsDragging(true);
-    setDisplayName("");
+    setDisplayName({ area: "", width: 0 });
 
     if (milliseconds === 0) {
       setIsTimeout(false);
@@ -51,7 +54,7 @@ const PanAndZoom: FC<OwnProps> = ({
 
     setLastMousePosition({
       clientX,
-      clientY
+      clientY,
     });
   }, []);
 
@@ -68,7 +71,7 @@ const PanAndZoom: FC<OwnProps> = ({
   }, [milliseconds]);
 
   const onMouseMove = useCallback(
-    e => {
+    (e) => {
       if (!isDragging) return;
 
       if (
@@ -79,7 +82,7 @@ const PanAndZoom: FC<OwnProps> = ({
       ) {
         const newOffset = {
           left: offset.left + (e.clientX - lastMousePosition.clientX),
-          top: offset.top + (e.clientY - lastMousePosition.clientY)
+          top: offset.top + (e.clientY - lastMousePosition.clientY),
         };
 
         setOffset(newOffset);
@@ -88,7 +91,7 @@ const PanAndZoom: FC<OwnProps> = ({
 
         setLastMousePosition({
           clientX,
-          clientY
+          clientY,
         });
       } else {
         if (!(offset.left >= -660 && offset.left <= 630)) {
@@ -110,7 +113,7 @@ const PanAndZoom: FC<OwnProps> = ({
   );
 
   const onWheel = useCallback(
-    e => {
+    (e) => {
       setLastMousePosition(null);
 
       if (e.deltaY < 0) {
@@ -129,7 +132,7 @@ const PanAndZoom: FC<OwnProps> = ({
     const scale = Math.pow(1.2, zoomLevel);
 
     return {
-      transform: `translate(${left}px, ${top}px) scale(${scale})`
+      transform: `translate(${left}px, ${top}px) scale(${scale})`,
     };
   }, [offset, zoomLevel]);
 
@@ -142,7 +145,7 @@ const PanAndZoom: FC<OwnProps> = ({
       onMouseMove={onMouseMove}
       onWheel={onWheel}
     >
-      {isTimeout && displayText && (
+      {isTimeout && displayText.area && (
         <AreaDisplayBox
           lastMousePosition={lastMousePosition}
           displayText={displayText}

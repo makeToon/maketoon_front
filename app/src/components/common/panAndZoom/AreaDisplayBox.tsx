@@ -5,7 +5,10 @@ import * as S from "./style";
 
 interface OwnProps {
   lastMousePosition: null | { clientX: number; clientY: number };
-  displayText: string;
+  displayText: {
+    area: string;
+    width: number;
+  };
 }
 
 const AreaDisplayBox: FC<OwnProps> = ({ lastMousePosition, displayText }) => {
@@ -19,22 +22,22 @@ const AreaDisplayBox: FC<OwnProps> = ({ lastMousePosition, displayText }) => {
     const heightSize = 78;
 
     return {
-      left: `${lastMousePosition.clientX -
-        wrapperPosition.x -
-        widthSizeHalf}px`,
-      top: `${lastMousePosition.clientY - wrapperPosition.y - heightSize}px`
+      left: `${
+        lastMousePosition.clientX - wrapperPosition.x - widthSizeHalf
+      }px`,
+      top: `${lastMousePosition.clientY - wrapperPosition.y - heightSize}px`,
     };
   }, [lastMousePosition]);
 
   return (
     <S.AreaDisplayBox style={AreaDisplayBoxPosition}>
-      {displayText}
+      {displayText.area}
       <div>
         <Link
-          onMouseDown={e => e.stopPropagation()}
-          onMouseUp={e => e.stopPropagation()}
-          onMouseMove={e => e.stopPropagation()}
-          to={`/photo/${displayText}`}
+          onMouseDown={(e) => e.stopPropagation()}
+          onMouseUp={(e) => e.stopPropagation()}
+          onMouseMove={(e) => e.stopPropagation()}
+          to={`/photo/${displayText.area}-${displayText.width}`}
         >
           사진 추가
         </Link>
