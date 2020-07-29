@@ -8,7 +8,7 @@ interface OwnProps {
   strokeColor: string;
   width?: number;
   height?: number;
-  setArea: (data: { area: string; width: number }) => void;
+  setArea: (data: { area: string; width: number; height: number }) => void;
 }
 
 const SvgComponent: FC<OwnProps> = ({
@@ -22,9 +22,12 @@ const SvgComponent: FC<OwnProps> = ({
     photoStore: { mapPhotos },
   } = usePhotoRedux();
 
-  const setAreaHandler = useCallback((width: number, area: string) => {
-    setArea({ area, width });
-  }, []);
+  const setAreaHandler = useCallback(
+    (width: number, height: number, area: string) => {
+      setArea({ area, width, height });
+    },
+    []
+  );
 
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
@@ -38,14 +41,22 @@ const SvgComponent: FC<OwnProps> = ({
             width="1"
             height="1"
           >
-            <image y={3} width={d.width} href={d.imgUrl} />
+            {d.width > d.height ? (
+              <image y={3} width={d.width} href={d.imgUrl} />
+            ) : (
+              <image y={3} height={d.height} href={d.imgUrl} />
+            )}
           </pattern>
         ))}
       </defs>
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) => {
-            setAreaHandler(e.currentTarget.getBBox().width, "서울특별시");
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "서울특별시"
+            );
           }}
           fill={
             document.getElementById("imgpattern_서울특별시") !== null
@@ -59,7 +70,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "강화군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "강화군"
+            )
           }
           fill={
             document.getElementById("imgpattern_강화군") !== null
@@ -74,7 +89,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "인천광역시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "인천광역시"
+            )
           }
           fill={
             document.getElementById("imgpattern_인천광역시") !== null
@@ -86,7 +105,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "인천 중구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "인천 중구"
+            )
           }
           fill={
             document.getElementById("imgpattern_인천") !== null
@@ -109,7 +132,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "옹진군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "옹진군"
+            )
           }
           fill={
             document.getElementById("imgpattern_옹진군") !== null
@@ -128,7 +155,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "김포시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "김포시"
+            )
           }
           fill={
             document.getElementById("imgpattern_김포시") !== null
@@ -139,7 +170,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "고양시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "고양시"
+            )
           }
           fill={
             document.getElementById("imgpattern_고양시") !== null
@@ -150,7 +185,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "파주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "파주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_파주시") !== null
@@ -161,7 +200,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "양주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "양주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_양주시") !== null
@@ -172,7 +215,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "의정부시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "의정부시"
+            )
           }
           fill={
             document.getElementById("imgpattern_의정부시") !== null
@@ -183,7 +230,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "동두천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "동두천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_동두천시") !== null
@@ -194,7 +245,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "연천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "연천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_연천군") !== null
@@ -205,7 +260,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "포천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "포천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_포천시") !== null
@@ -216,7 +275,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "구리시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "구리시"
+            )
           }
           fill={
             document.getElementById("imgpattern_구리시") !== null
@@ -227,7 +290,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "남양주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "남양주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_남양주시") !== null
@@ -238,7 +305,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "하남시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "하남시"
+            )
           }
           fill={
             document.getElementById("imgpattern_하남시") !== null
@@ -249,7 +320,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "양평군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "양평군"
+            )
           }
           fill={
             document.getElementById("imgpattern_양평군") !== null
@@ -260,7 +335,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "가평군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "가평군"
+            )
           }
           fill={
             document.getElementById("imgpattern_가평군") !== null
@@ -271,7 +350,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "여주군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "여주군"
+            )
           }
           fill={
             document.getElementById("imgpattern_여주군") !== null
@@ -282,7 +365,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_광주시") !== null
@@ -293,7 +380,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "성남시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "성남시"
+            )
           }
           fill={
             document.getElementById("imgpattern_성남시") !== null
@@ -304,7 +395,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "과천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "과천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_과천시") !== null
@@ -315,7 +410,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "의왕시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "의왕시"
+            )
           }
           fill={
             document.getElementById("imgpattern_의왕시") !== null
@@ -326,7 +425,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "용인시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "용인시"
+            )
           }
           fill={
             document.getElementById("imgpattern_용인시") !== null
@@ -337,7 +440,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "안양시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "안양시"
+            )
           }
           fill={
             document.getElementById("imgpattern_안양시") !== null
@@ -348,7 +455,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "부천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "부천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_부천시") !== null
@@ -359,7 +470,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광명시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광명시"
+            )
           }
           fill={
             document.getElementById("imgpattern_광명시") !== null
@@ -370,7 +485,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "시흥시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "시흥시"
+            )
           }
           fill={
             document.getElementById("imgpattern_시흥시") !== null
@@ -381,7 +500,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "이천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "이천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_이천시") !== null
@@ -392,7 +515,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "수원시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "수원시"
+            )
           }
           fill={
             document.getElementById("imgpattern_수원시") !== null
@@ -403,7 +530,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "군포시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "군포시"
+            )
           }
           fill={
             document.getElementById("imgpattern_군포시") !== null
@@ -414,7 +545,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "오산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "오산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_오산시") !== null
@@ -425,7 +560,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "안산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "안산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_안산시") !== null
@@ -436,7 +575,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "평택시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "평택시"
+            )
           }
           fill={
             document.getElementById("imgpattern_평택시") !== null
@@ -447,7 +590,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "안성시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "안성시"
+            )
           }
           fill={
             document.getElementById("imgpattern_안성시") !== null
@@ -458,7 +605,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "화성시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "화성시"
+            )
           }
           fill={
             document.getElementById("imgpattern_화성시") !== null
@@ -473,7 +624,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "철원군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "철원군"
+            )
           }
           fill={
             document.getElementById("imgpattern_철원군") !== null
@@ -484,7 +639,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "화천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "화천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_화천군") !== null
@@ -495,7 +654,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "춘천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "춘천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_춘천시") !== null
@@ -506,7 +669,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "홍천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "홍천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_홍천군") !== null
@@ -517,7 +684,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "횡성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "횡성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_횡성군") !== null
@@ -528,7 +699,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "원주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "원주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_원주시") !== null
@@ -539,7 +714,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "양구군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "양구군"
+            )
           }
           fill={
             document.getElementById("imgpattern_양구군") !== null
@@ -550,7 +729,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "인제군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "인제군"
+            )
           }
           fill={
             document.getElementById("imgpattern_인제군") !== null
@@ -561,7 +744,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "고성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "고성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_고성군") !== null
@@ -572,7 +759,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "속초시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "속초시"
+            )
           }
           fill={
             document.getElementById("imgpattern_속초시") !== null
@@ -583,7 +774,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "안양군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "안양군"
+            )
           }
           fill={
             document.getElementById("imgpattern_안양군") !== null
@@ -594,7 +789,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "평창군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "평창군"
+            )
           }
           fill={
             document.getElementById("imgpattern_평창군") !== null
@@ -605,7 +804,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "강릉시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "강릉시"
+            )
           }
           fill={
             document.getElementById("imgpattern_강릉시") !== null
@@ -616,7 +819,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "정선군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "정선군"
+            )
           }
           fill={
             document.getElementById("imgpattern_정선군") !== null
@@ -627,7 +834,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "동해시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "동해시"
+            )
           }
           fill={
             document.getElementById("imgpattern_동해시") !== null
@@ -638,7 +849,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영월군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영월군"
+            )
           }
           fill={
             document.getElementById("imgpattern_영월군") !== null
@@ -649,7 +864,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "태백시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "태백시"
+            )
           }
           fill={
             document.getElementById("imgpattern_태백시") !== null
@@ -660,7 +879,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "삼척시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "삼척시"
+            )
           }
           fill={
             document.getElementById("imgpattern_삼척시") !== null
@@ -673,7 +896,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "진천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "진천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_진천군") !== null
@@ -684,7 +911,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "음성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "음성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_음성군") !== null
@@ -695,7 +926,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "충주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "충주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_충주시") !== null
@@ -706,7 +941,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "제천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "제천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_제천시") !== null
@@ -717,7 +956,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "단양군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "단양군"
+            )
           }
           fill={
             document.getElementById("imgpattern_단양군") !== null
@@ -728,7 +971,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "괴산군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "괴산군"
+            )
           }
           fill={
             document.getElementById("imgpattern_괴산군") !== null
@@ -739,7 +986,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "증평군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "증평군"
+            )
           }
           fill={
             document.getElementById("imgpattern_증평군") !== null
@@ -750,7 +1001,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "청주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "청주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_청주시") !== null
@@ -761,7 +1016,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "보은군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "보은군"
+            )
           }
           fill={
             document.getElementById("imgpattern_보은군") !== null
@@ -772,7 +1031,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "옥천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "옥천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_옥천군") !== null
@@ -783,7 +1046,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영동군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영동군"
+            )
           }
           fill={
             document.getElementById("imgpattern_영동군") !== null
@@ -796,7 +1063,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "유성구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "유성구"
+            )
           }
           fill={
             document.getElementById("imgpattern_유성구") !== null
@@ -807,7 +1078,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대전 서구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대전 서구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대전") !== null
@@ -818,7 +1093,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대전 중구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대전 중구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대전") !== null
@@ -829,7 +1108,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대덕구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대덕구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대덕구") !== null
@@ -840,7 +1123,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대전 동구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대전 동구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대전") !== null
@@ -853,7 +1140,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "천안시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "천안시"
+            )
           }
           fill={
             document.getElementById("imgpattern_천안시") !== null
@@ -864,7 +1155,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "계룡시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "계룡시"
+            )
           }
           fill={
             document.getElementById("imgpattern_계룡시") !== null
@@ -875,7 +1170,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "공주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "공주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_공주시") !== null
@@ -886,7 +1185,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "아산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "아산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_아산시") !== null
@@ -897,7 +1200,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "당진시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "당진시"
+            )
           }
           fill={
             document.getElementById("imgpattern_당진시") !== null
@@ -908,7 +1215,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "예산군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "예산군"
+            )
           }
           fill={
             document.getElementById("imgpattern_예산군") !== null
@@ -919,7 +1230,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "서산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "서산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_서산시") !== null
@@ -932,7 +1247,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "태안시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "태안시"
+            )
           }
           fill={
             document.getElementById("imgpattern_태안시") !== null
@@ -945,7 +1264,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "세종특별자치시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "세종특별자치시"
+            )
           }
           fill={
             document.getElementById("imgpattern_세종특별자치시") !== null
@@ -956,7 +1279,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "홍성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "홍성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_홍성군") !== null
@@ -967,7 +1294,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "청양군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "청양군"
+            )
           }
           fill={
             document.getElementById("imgpattern_청양군") !== null
@@ -978,7 +1309,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "논산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "논산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_논산시") !== null
@@ -989,7 +1324,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "금산군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "금산군"
+            )
           }
           fill={
             document.getElementById("imgpattern_금산군") !== null
@@ -1000,7 +1339,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "부여군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "부여군"
+            )
           }
           fill={
             document.getElementById("imgpattern_부여군") !== null
@@ -1011,7 +1354,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "보령시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "보령시"
+            )
           }
           fill={
             document.getElementById("imgpattern_보령시") !== null
@@ -1024,7 +1371,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "서천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "서천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_서천군") !== null
@@ -1037,7 +1388,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "제주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "제주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_제주시") !== null
@@ -1050,7 +1405,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "서귀포시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "서귀포시"
+            )
           }
           fill={
             document.getElementById("imgpattern_서귀포시") !== null
@@ -1065,7 +1424,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "문경시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "문경시"
+            )
           }
           fill={
             document.getElementById("imgpattern_문경시") !== null
@@ -1076,7 +1439,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "상주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "상주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_상주시") !== null
@@ -1087,7 +1454,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "예천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "예천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_예천군") !== null
@@ -1098,7 +1469,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_영주시") !== null
@@ -1109,7 +1484,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "봉화군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "봉화군"
+            )
           }
           fill={
             document.getElementById("imgpattern_봉화군") !== null
@@ -1120,7 +1499,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영양군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영양군"
+            )
           }
           fill={
             document.getElementById("imgpattern_영양군") !== null
@@ -1131,7 +1514,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "울진군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "울진군"
+            )
           }
           fill={
             document.getElementById("imgpattern_울진군") !== null
@@ -1142,7 +1529,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "안동시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "안동시"
+            )
           }
           fill={
             document.getElementById("imgpattern_안동시") !== null
@@ -1153,7 +1544,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "의성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "의성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_의성군") !== null
@@ -1164,7 +1559,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "김천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "김천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_김천시") !== null
@@ -1175,7 +1574,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "구미시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "구미시"
+            )
           }
           fill={
             document.getElementById("imgpattern_구미시") !== null
@@ -1186,7 +1589,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "성주군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "성주군"
+            )
           }
           fill={
             document.getElementById("imgpattern_성주군") !== null
@@ -1197,7 +1604,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "고령군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "고령군"
+            )
           }
           fill={
             document.getElementById("imgpattern_고령군") !== null
@@ -1208,7 +1619,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "칠곡군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "칠곡군"
+            )
           }
           fill={
             document.getElementById("imgpattern_칠곡군") !== null
@@ -1219,7 +1634,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "군위군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "군위군"
+            )
           }
           fill={
             document.getElementById("imgpattern_군위군") !== null
@@ -1230,7 +1649,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영덕군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영덕군"
+            )
           }
           fill={
             document.getElementById("imgpattern_영덕군") !== null
@@ -1241,7 +1664,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "청송군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "청송군"
+            )
           }
           fill={
             document.getElementById("imgpattern_청송군") !== null
@@ -1252,7 +1679,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "포항시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "포항시"
+            )
           }
           fill={
             document.getElementById("imgpattern_포항시") !== null
@@ -1263,7 +1694,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_영천시") !== null
@@ -1274,7 +1709,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "경산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "경산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_경산시") !== null
@@ -1285,7 +1724,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "청도군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "청도군"
+            )
           }
           fill={
             document.getElementById("imgpattern_청도군") !== null
@@ -1296,7 +1739,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "경주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "경주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_경주시") !== null
@@ -1307,7 +1754,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "울릉군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "울릉군"
+            )
           }
           fill={
             document.getElementById("imgpattern_울릉군") !== null
@@ -1322,7 +1773,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대구 동구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대구 동구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대구") !== null
@@ -1333,7 +1788,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대구 북구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대구 북구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대구") !== null
@@ -1344,7 +1803,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "수성구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "수성구"
+            )
           }
           fill={
             document.getElementById("imgpattern_수성구") !== null
@@ -1355,7 +1818,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대구 중구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대구 중구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대구") !== null
@@ -1366,7 +1833,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대구 서구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대구 서구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대구") !== null
@@ -1377,7 +1848,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "대구 남구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "대구 남구"
+            )
           }
           fill={
             document.getElementById("imgpattern_대구") !== null
@@ -1388,7 +1863,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "달서구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "달서구"
+            )
           }
           fill={
             document.getElementById("imgpattern_달서구") !== null
@@ -1399,7 +1878,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "달성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "달성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_달성군") !== null
@@ -1414,7 +1897,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "울산 북구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "울산 북구"
+            )
           }
           fill={
             document.getElementById("imgpattern_울산") !== null
@@ -1425,7 +1912,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "울산 중구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "울산 중구"
+            )
           }
           fill={
             document.getElementById("imgpattern_울산") !== null
@@ -1436,7 +1927,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "울산 동구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "울산 동구"
+            )
           }
           fill={
             document.getElementById("imgpattern_울산") !== null
@@ -1447,7 +1942,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "울산 남구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "울산 남구"
+            )
           }
           fill={
             document.getElementById("imgpattern_울산") !== null
@@ -1458,7 +1957,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "울주군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "울주군"
+            )
           }
           fill={
             document.getElementById("imgpattern_울주군") !== null
@@ -1471,7 +1974,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "거창군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "거창군"
+            )
           }
           fill={
             document.getElementById("imgpattern_거창군") !== null
@@ -1482,7 +1989,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "합천군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "합천군"
+            )
           }
           fill={
             document.getElementById("imgpattern_합천군") !== null
@@ -1493,7 +2004,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "함양군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "함양군"
+            )
           }
           fill={
             document.getElementById("imgpattern_함양군") !== null
@@ -1504,7 +2019,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "창녕군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "창녕군"
+            )
           }
           fill={
             document.getElementById("imgpattern_창녕군") !== null
@@ -1515,7 +2034,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "밀양시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "밀양시"
+            )
           }
           fill={
             document.getElementById("imgpattern_밀양시") !== null
@@ -1526,7 +2049,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "양산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "양산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_양산시") !== null
@@ -1537,7 +2064,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "김해시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "김해시"
+            )
           }
           fill={
             document.getElementById("imgpattern_김해시") !== null
@@ -1548,7 +2079,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "창원시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "창원시"
+            )
           }
           fill={
             document.getElementById("imgpattern_창원시") !== null
@@ -1559,7 +2094,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "함안군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "함안군"
+            )
           }
           fill={
             document.getElementById("imgpattern_함안군") !== null
@@ -1570,7 +2109,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "의령군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "의령군"
+            )
           }
           fill={
             document.getElementById("imgpattern_의령군") !== null
@@ -1581,7 +2124,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "산청군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "산청군"
+            )
           }
           fill={
             document.getElementById("imgpattern_산청군") !== null
@@ -1592,7 +2139,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "진주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "진주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_진주시") !== null
@@ -1603,7 +2154,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "고성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "고성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_고성군") !== null
@@ -1614,7 +2169,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "거제시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "거제시"
+            )
           }
           fill={
             document.getElementById("imgpattern_거제시") !== null
@@ -1627,7 +2186,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "사천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "사천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_사천시") !== null
@@ -1638,7 +2201,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "하동군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "하동군"
+            )
           }
           fill={
             document.getElementById("imgpattern_하동군") !== null
@@ -1649,7 +2216,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "남해군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "남해군"
+            )
           }
           fill={
             document.getElementById("imgpattern_남해군") !== null
@@ -1662,7 +2233,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "통영시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "통영시"
+            )
           }
           fill={
             document.getElementById("imgpattern_통영시") !== null
@@ -1684,7 +2259,11 @@ const SvgComponent: FC<OwnProps> = ({
       <S.G
         stroke={strokeColor}
         onClick={(e) =>
-          setAreaHandler(e.currentTarget.getBBox().width, "부산광역시")
+          setAreaHandler(
+            e.currentTarget.getBBox().width,
+            e.currentTarget.getBBox().height,
+            "부산광역시"
+          )
         }
         fill={
           document.getElementById("imgpattern_부산광역시") !== null
@@ -1712,7 +2291,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "무주군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "무주군"
+            )
           }
           fill={
             document.getElementById("imgpattern_무주군") !== null
@@ -1723,7 +2306,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "진안군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "진안군"
+            )
           }
           fill={
             document.getElementById("imgpattern_진안군") !== null
@@ -1734,7 +2321,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "전주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "전주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_전주시") !== null
@@ -1747,7 +2338,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "완주군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "완주군"
+            )
           }
           fill={
             document.getElementById("imgpattern_완주군") !== null
@@ -1760,7 +2355,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "익산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "익산시"
+            )
           }
           fill={
             document.getElementById("imgpattern_익산시") !== null
@@ -1771,7 +2370,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "장수군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "장수군"
+            )
           }
           fill={
             document.getElementById("imgpattern_장수군") !== null
@@ -1782,7 +2385,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "남원군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "남원군"
+            )
           }
           fill={
             document.getElementById("imgpattern_남원군") !== null
@@ -1793,7 +2400,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "임실군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "임실군"
+            )
           }
           fill={
             document.getElementById("imgpattern_임실군") !== null
@@ -1804,7 +2415,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "순창군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "순창군"
+            )
           }
           fill={
             document.getElementById("imgpattern_순창군") !== null
@@ -1815,7 +2430,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "정읍시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "정읍시"
+            )
           }
           fill={
             document.getElementById("imgpattern_정읍시") !== null
@@ -1826,7 +2445,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "김제시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "김제시"
+            )
           }
           fill={
             document.getElementById("imgpattern_김제시") !== null
@@ -1837,7 +2460,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "부안군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "부안군"
+            )
           }
           fill={
             document.getElementById("imgpattern_부안군") !== null
@@ -1848,7 +2475,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "고창군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "고창군"
+            )
           }
           fill={
             document.getElementById("imgpattern_고창군") !== null
@@ -1859,7 +2490,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "군산시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "군산시"
+            )
           }
         >
           {" "}
@@ -1874,7 +2509,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광산구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광산구"
+            )
           }
           fill={
             document.getElementById("imgpattern_광산구") !== null
@@ -1885,7 +2524,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광주 북구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광주 북구"
+            )
           }
           fill={
             document.getElementById("imgpattern_광주") !== null
@@ -1896,7 +2539,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광주 동구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광주 동구"
+            )
           }
           fill={
             document.getElementById("imgpattern_광주") !== null
@@ -1907,7 +2554,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광주 남구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광주 남구"
+            )
           }
           fill={
             document.getElementById("imgpattern_광주") !== null
@@ -1918,7 +2569,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광주 서구")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광주 서구"
+            )
           }
           fill={
             document.getElementById("imgpattern_광주") !== null
@@ -1931,7 +2586,11 @@ const SvgComponent: FC<OwnProps> = ({
       <g fill={fillColor} stroke={strokeColor}>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "구례군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "구례군"
+            )
           }
           fill={
             document.getElementById("imgpattern_구례군") !== null
@@ -1942,7 +2601,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "곡성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "곡성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_곡성군") !== null
@@ -1953,7 +2616,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "담양군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "담양군"
+            )
           }
           fill={
             document.getElementById("imgpattern_담양군") !== null
@@ -1964,7 +2631,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "장성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "장성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_장성군") !== null
@@ -1975,7 +2646,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영광군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영광군"
+            )
           }
           fill={
             document.getElementById("imgpattern_영광군") !== null
@@ -1986,7 +2661,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "함평군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "함평군"
+            )
           }
           fill={
             document.getElementById("imgpattern_함평군") !== null
@@ -1997,7 +2676,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "순천시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "순천시"
+            )
           }
           fill={
             document.getElementById("imgpattern_순천시") !== null
@@ -2008,7 +2691,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "광양시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "광양시"
+            )
           }
           fill={
             document.getElementById("imgpattern_광양시") !== null
@@ -2021,7 +2708,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "여수시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "여수시"
+            )
           }
           fill={
             document.getElementById("imgpattern_여수시") !== null
@@ -2036,7 +2727,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "화순군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "화순군"
+            )
           }
           fill={
             document.getElementById("imgpattern_화순군") !== null
@@ -2047,7 +2742,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "나주시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "나주시"
+            )
           }
           fill={
             document.getElementById("imgpattern_나주시") !== null
@@ -2058,7 +2757,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "무안군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "무안군"
+            )
           }
           fill={
             document.getElementById("imgpattern_무안군") !== null
@@ -2073,7 +2776,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "목포시")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "목포시"
+            )
           }
           fill={
             document.getElementById("imgpattern_목포시") !== null
@@ -2084,7 +2791,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "영암군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "영암군"
+            )
           }
           fill={
             document.getElementById("imgpattern_영암군") !== null
@@ -2095,7 +2806,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "보성군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "보성군"
+            )
           }
           fill={
             document.getElementById("imgpattern_보성군") !== null
@@ -2106,7 +2821,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "고흥군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "고흥군"
+            )
           }
           fill={
             document.getElementById("imgpattern_고흥군") !== null
@@ -2121,7 +2840,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "장흥군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "장흥군"
+            )
           }
           fill={
             document.getElementById("imgpattern_장흥군") !== null
@@ -2132,7 +2855,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "강진군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "강진군"
+            )
           }
           fill={
             document.getElementById("imgpattern_강진군") !== null
@@ -2143,7 +2870,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.Path
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "해남군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "해남군"
+            )
           }
           fill={
             document.getElementById("imgpattern_해남군") !== null
@@ -2154,7 +2885,11 @@ const SvgComponent: FC<OwnProps> = ({
         />
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "진도군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "진도군"
+            )
           }
           fill={
             document.getElementById("imgpattern_진도군") !== null
@@ -2167,7 +2902,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "완도군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "완도군"
+            )
           }
           fill={
             document.getElementById("imgpattern_완도군") !== null
@@ -2189,7 +2928,11 @@ const SvgComponent: FC<OwnProps> = ({
         </S.G>
         <S.G
           onClick={(e) =>
-            setAreaHandler(e.currentTarget.getBBox().width, "신안군")
+            setAreaHandler(
+              e.currentTarget.getBBox().width,
+              e.currentTarget.getBBox().height,
+              "신안군"
+            )
           }
           fill={
             document.getElementById("imgpattern_신안군") !== null

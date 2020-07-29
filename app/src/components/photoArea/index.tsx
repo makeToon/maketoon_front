@@ -24,10 +24,6 @@ const PhotoArea: FC = () => {
     }
   }, [didMountRef]);
 
-  const goBackHandler = useCallback(() => {
-    goBack();
-  }, []);
-
   return (
     <>
       {isModalOpen && (

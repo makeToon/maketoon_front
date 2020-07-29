@@ -8,6 +8,7 @@ interface OwnProps {
   displayText: {
     area: string;
     width: number;
+    height: number;
   };
 }
 
@@ -37,7 +38,7 @@ const AreaDisplayBox: FC<OwnProps> = ({ lastMousePosition, displayText }) => {
           onMouseDown={(e) => e.stopPropagation()}
           onMouseUp={(e) => e.stopPropagation()}
           onMouseMove={(e) => e.stopPropagation()}
-          to={`/photo/${displayText.area}-${displayText.width}`}
+          to={`/photo/${displayText.area}-${displayText.width}-${displayText.height}`}
         >
           사진 추가
         </Link>

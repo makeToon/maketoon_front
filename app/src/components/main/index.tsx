@@ -11,7 +11,7 @@ import { MapName } from "assets/index.ts";
 
 const Main: FC = () => {
   const didMountRef = useRef(false);
-  const [area, setArea] = useState({ area: "", width: 0 });
+  const [area, setArea] = useState({ area: "", width: 0, height: 0 });
 
   const {
     photoStore: { accessToken },
