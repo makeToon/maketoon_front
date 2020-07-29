@@ -1,4 +1,5 @@
 import React, { FC, useCallback, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import * as S from "./style";
 import Modal from "components/common/modal";
@@ -26,14 +27,16 @@ const CheckModal: FC<OwnProps> = ({
     photoStore: { accessToken, putCropPhotoStatus },
     photoReducer: { putCropPhoto, resetStatus },
   } = usePhotoRedux();
+  const { push } = useHistory();
 
   const setCloseHandler = useCallback(() => {
     setIsModalOpen(false);
   }, [isModalOpen]);
 
   useEffect(() => {
-    if (putCropPhotoStatus === 200) {
+    if (putCropPhotoStatus === 204) {
       setCloseHandler();
+      push("/photomap");
     }
 
     resetStatus();
@@ -61,7 +64,7 @@ const CheckModal: FC<OwnProps> = ({
                 photo,
                 area: area.split("-")[0],
                 width: area.split("-")[1],
-                height: "0",
+                height: area.split("-")[2],
               })
             }
             className="yes"

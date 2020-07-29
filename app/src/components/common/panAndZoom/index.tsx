@@ -9,8 +9,13 @@ interface OwnProps {
   displayText: {
     area: string;
     width: number;
+    height: number;
   };
-  setDisplayName: (data: { area: string; width: number }) => void;
+  setDisplayName: (data: {
+    area: string;
+    width: number;
+    height: number;
+  }) => void;
 }
 
 let milliseconds = 0;
@@ -42,7 +47,7 @@ const PanAndZoom: FC<OwnProps> = ({
 
   const onMouseDown = useCallback((e) => {
     setIsDragging(true);
-    setDisplayName({ area: "", width: 0 });
+    setDisplayName({ area: "", width: 0, height: 0 });
 
     if (milliseconds === 0) {
       setIsTimeout(false);
