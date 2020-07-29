@@ -1,9 +1,10 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useCallback, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import * as S from "./style";
 import Modal from "components/common/modal";
 import { usePhotoRedux } from "container/photo";
+import { Loading } from "assets/index";
 
 interface OwnProps {
   photo: File;
@@ -28,13 +29,26 @@ const CheckModal: FC<OwnProps> = ({
     photoReducer: { putCropPhoto, resetStatus },
   } = usePhotoRedux();
   const { push } = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
 
   const setCloseHandler = useCallback(() => {
     setIsModalOpen(false);
   }, [isModalOpen]);
 
+  const handleCropPhoto = useCallback(() => {
+    setIsLoading(true);
+    putCropPhoto({
+      accessToken,
+      photo,
+      area: area.split("-")[0],
+      width: area.split("-")[1],
+      height: area.split("-")[2],
+    });
+  }, [accessToken, photo, area]);
+
   useEffect(() => {
     if (putCropPhotoStatus === 204) {
+      setIsLoading(false);
       setCloseHandler();
       push("/photomap");
     }
@@ -57,23 +71,21 @@ const CheckModal: FC<OwnProps> = ({
         </h1>
 
         <div>
-          <button
-            onClick={() =>
-              putCropPhoto({
-                accessToken,
-                photo,
-                area: area.split("-")[0],
-                width: area.split("-")[1],
-                height: area.split("-")[2],
-              })
-            }
-            className="yes"
-          >
-            예
-          </button>
-          <button onClick={setCloseHandler} className="no">
-            아니오
-          </button>
+          {isLoading ? (
+            <div className="loadingWrapper">
+              <p>이미지를 업로드하는 중 입니다. 잠시만 기다려주십시오.</p>
+              <img className="loading" src={Loading} alt="로딩.." />
+            </div>
+          ) : (
+            <>
+              <button onClick={handleCropPhoto} className="yes">
+                예
+              </button>
+              <button onClick={setCloseHandler} className="no">
+                아니오
+              </button>
+            </>
+          )}
         </div>
       </S.CheckModal>
     </Modal>

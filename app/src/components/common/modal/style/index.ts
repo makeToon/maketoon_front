@@ -19,6 +19,6 @@ export const Wrapper = styled.div<{ width?: string; height?: string }>`
     animation: ${downToUp} 0.6s;
     width: ${({ width }) => (width ? width : "800px")};
     height: ${({ height }) => (height ? height : "500px")};
-    background: #f5f9fc;
+    background: #ffffff;
   }
 `;
