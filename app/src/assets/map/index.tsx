@@ -38,7 +38,7 @@ const SvgComponent: FC<OwnProps> = ({
             width="1"
             height="1"
           >
-            <image width={d.width} href={d.imgUrl} />
+            <image y={3} width={d.width} href={d.imgUrl} />
           </pattern>
         ))}
       </defs>
