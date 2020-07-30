@@ -1,4 +1,4 @@
-import { put, call, all } from "redux-saga/effects";
+import { put, call, all, getContext } from "redux-saga/effects";
 
 import photoSaga from "./photoSaga";
 import { AxiosError } from "axios";
@@ -15,7 +15,7 @@ interface SagaEntityParams<ActionT, PayloadT> {
 export function* sagaEntity<ActionT, PayloadT = object>({
   action,
   api,
-  type
+  type,
 }: SagaEntityParams<ActionT, PayloadT>) {
   try {
     const response = yield call(api, action.payload);
@@ -26,11 +26,13 @@ export function* sagaEntity<ActionT, PayloadT = object>({
 
     if (error.response.status === 401) {
       alert("다시 로그인 후 이용해 주세요.");
+      const history = yield getContext("history");
       yield put({ type: "LOG_OUT" });
+      history.push("/");
     } else {
       yield put({
         payload: { status: error.response.status },
-        type
+        type,
       });
     }
   }
