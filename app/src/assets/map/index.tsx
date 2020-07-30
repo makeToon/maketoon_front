@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useEffect, useRef } from "react";
 
 import * as S from "./style";
+import {} from "../";
 import { usePhotoRedux } from "container/photo";
 
 interface OwnProps {
@@ -41,10 +42,10 @@ const SvgComponent: FC<OwnProps> = ({
             width="1"
             height="1"
           >
-            {d.width > d.height ? (
-              <image y={3} width={d.width} href={d.imgUrl} />
+            {Number(d.width) > Number(d.height) ? (
+              <image width={d.width} href={d.imgUrl} />
             ) : (
-              <image y={3} height={d.height} href={d.imgUrl} />
+              <image height={d.height} href={d.imgUrl} />
             )}
           </pattern>
         ))}
