@@ -168,24 +168,24 @@ export const CheckModal = styled.div`
   > div {
     margin-top: 40px;
 
-    > div {
+    > div.loadingWrapper {
       display: flex;
-      justify-content: center;
-
-      > div.loadingWrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        > p {
-          color: ${COLORS.serve3};
-        }
-      }
+      flex-direction: column;
+      align-items: center;
 
       img.loading {
         width: 60px;
         height: 60px;
       }
+
+      > p {
+        color: ${COLORS.serve3};
+      }
+    }
+
+    > div {
+      display: flex;
+      justify-content: center;
 
       button {
         all: unset;
