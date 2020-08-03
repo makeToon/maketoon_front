@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 
 import * as S from "./style";
-import {} from "../";
 import { usePhotoRedux } from "container/photo";
 
 interface OwnProps {
@@ -22,6 +22,7 @@ const SvgComponent: FC<OwnProps> = ({
   const {
     photoStore: { mapPhotos },
   } = usePhotoRedux();
+  const { push } = useHistory();
 
   const setAreaHandler = useCallback(
     (width: number, height: number, area: string) => {
@@ -29,6 +30,12 @@ const SvgComponent: FC<OwnProps> = ({
     },
     []
   );
+
+  useEffect(() => {
+    if (mapPhotos.length > 0) {
+      push("/photomap");
+    }
+  }, [mapPhotos]);
 
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
