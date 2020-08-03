@@ -2,6 +2,7 @@ import React, { FC, useRef, useState, useEffect } from "react";
 
 import * as S from "./style";
 import { COLORS } from "src/styles/GlobalStyle";
+import { useAuthRedux } from "container/auth";
 import { usePhotoRedux } from "container/photo";
 import Header from "components/header";
 import PanAndZoom from "components/common/panAndZoom";
@@ -14,9 +15,11 @@ const Main: FC = () => {
   const [area, setArea] = useState({ area: "", width: 0, height: 0 });
 
   const {
-    photoStore: { accessToken },
     photoReducer: { getMapPhotos },
   } = usePhotoRedux();
+  const {
+    authStore: { accessToken },
+  } = useAuthRedux();
 
   useEffect(() => {
     if (!didMountRef.current) {

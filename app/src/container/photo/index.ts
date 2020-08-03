@@ -4,30 +4,30 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   putCropPhotoAction,
   getMapPhotosAction,
-  resetStatusAction
+  resetStatusAction,
 } from "actions/photo";
 import { AppState } from "data/store";
 import {
   PutCropPhotoRequestType,
   MapPhotos,
-  AccessToken
+  AccessToken,
 } from "middleware/api/apiTypes";
 import PhotoArea from "components/photoArea";
 
 interface StoreProps {
-  accessToken: string;
   putCropPhotoStatus: number;
   getMapPhotoStatus: number;
+  getPhotoLoading: boolean;
   mapPhotos: MapPhotos[];
 }
 
 export const usePhotoRedux = () => {
   const dispatch = useDispatch();
-  const photoStore = useSelector<AppState, StoreProps>(state => ({
-    accessToken: state.auth.accessToken,
+  const photoStore = useSelector<AppState, StoreProps>((state) => ({
     mapPhotos: state.photo.mapPhotos,
+    getPhotoLoading: state.photo.getPhotoLoading,
     putCropPhotoStatus: state.photo.putCropPhotoStatus,
-    getMapPhotoStatus: state.photo.getMapPhotosStatus
+    getMapPhotoStatus: state.photo.getMapPhotosStatus,
   }));
 
   const putCropPhoto = useCallback(
