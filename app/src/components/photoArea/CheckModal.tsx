@@ -34,6 +34,7 @@ const CheckModal: FC<OwnProps> = ({
   } = useAuthRedux();
   const { push } = useHistory();
   const [isLoading, setIsLoading] = useState(false);
+  const [warningMeassage, setWarningMessage] = useState("");
 
   const setCloseHandler = useCallback(() => {
     setIsModalOpen(false);
@@ -55,6 +56,9 @@ const CheckModal: FC<OwnProps> = ({
       setIsLoading(false);
       setCloseHandler();
       push("/photomap");
+    } else if (putCropPhotoStatus === 403) {
+      setIsLoading(false);
+      setWarningMessage("이미지는 3MB까지만 업로드 가능합니다.");
     }
 
     resetStatus();
@@ -81,15 +85,16 @@ const CheckModal: FC<OwnProps> = ({
               <img className="loading" src={Loading} alt="로딩.." />
             </div>
           ) : (
-            <>
+            <div>
               <button onClick={handleCropPhoto} className="yes">
                 예
               </button>
               <button onClick={setCloseHandler} className="no">
                 아니오
               </button>
-            </>
+            </div>
           )}
+          {warningMeassage && <S.Warning>{warningMeassage}</S.Warning>}
         </div>
       </S.CheckModal>
     </Modal>
