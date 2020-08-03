@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { COLORS } from "src/styles/GlobalStyle";
+
 export const Wrapper = styled.header`
   width: 100%;
   height: 80px;
@@ -25,6 +27,17 @@ export const LogoLabel = styled.div`
       font-size: 36px;
       font-weight: bold;
     }
+  }
+`;
+
+export const LoadingMessage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${COLORS.serve3};
+
+  > img {
+    width: 32px;
   }
 `;
 

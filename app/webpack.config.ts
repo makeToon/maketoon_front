@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: __dirname + "/dist",
     publicPath: "/",
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   module: {
     rules: [
@@ -16,21 +16,21 @@ module.exports = {
         exclude: /node_modules/,
         test: /\.(js|jsx)$/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         loader: "ts-loader",
-        test: /\.(ts|tsx)$/
+        test: /\.(ts|tsx)$/,
       },
       {
         test: /\.html$/,
         use: [
           {
             loader: "html-loader",
-            options: { minimize: true }
-          }
-        ]
+            options: { minimize: true },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -39,8 +39,8 @@ module.exports = {
           { loader: "style-loader" },
           { loader: "css-loader" },
           { loader: "postcss-loader" },
-          { loader: "postcss-styled" }
-        ]
+          { loader: "postcss-styled" },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
@@ -50,10 +50,10 @@ module.exports = {
             options: {
               limit: 500000,
               name: "[name].[ext]?[hash]",
-              publicPath: "/dist"
-            }
-          }
-        ]
+              publicPath: "/dist",
+            },
+          },
+        ],
       },
       {
         test: /\.ttf$/,
@@ -61,12 +61,12 @@ module.exports = {
           {
             loader: "ttf-loader",
             options: {
-              name: "./font/[hash].[ext]"
-            }
-          }
-        ]
-      }
-    ]
+              name: "./font/[hash].[ext]",
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
     extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
@@ -80,24 +80,24 @@ module.exports = {
       actions: path.resolve(__dirname, "src/data/actions"),
       reducers: path.resolve(__dirname, "src/data/reducers"),
       middleware: path.resolve(__dirname, "src/data/middleware"),
-      utils: path.resolve(__dirname, "src/utils")
-    }
+      utils: path.resolve(__dirname, "src/utils"),
+    },
   },
   plugins: [
     new HtmlWebPackPlugin({
       favicon: "./public/favicon.ico",
       filename: "./index.html",
       showErrors: true,
-      template: "./public/index.html"
+      template: "./public/index.html",
     }),
     new MiniCssExtractPlugin({
       chunkFilename: "[id].css",
-      template: "[name].css"
+      template: "[name].css",
     }),
-    new Dotenv()
+    new Dotenv(),
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
-  devtool: "inline-source-map" // 코드의 오류를 상세하게함. ( 배포 후 'none' 으로 )
+  devtool: "none", // 코드의 오류를 상세하게함. ( 배포 후 'none' 으로 )
 };

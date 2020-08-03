@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import * as S from "./style";
 import Modal from "components/common/modal";
+import { useAuthRedux } from "container/auth";
 import { usePhotoRedux } from "container/photo";
 import { Loading } from "assets/index";
 
@@ -25,9 +26,12 @@ const CheckModal: FC<OwnProps> = ({
   setIsModalOpen,
 }) => {
   const {
-    photoStore: { accessToken, putCropPhotoStatus },
+    photoStore: { putCropPhotoStatus },
     photoReducer: { putCropPhoto, resetStatus },
   } = usePhotoRedux();
+  const {
+    authStore: { accessToken },
+  } = useAuthRedux();
   const { push } = useHistory();
   const [isLoading, setIsLoading] = useState(false);
 
