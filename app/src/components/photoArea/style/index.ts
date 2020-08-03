@@ -140,6 +140,16 @@ export const SubmitCover = styled.div`
   }
 `;
 
+export const Warning = styled.p`
+  margin-top: 6px;
+  color: red;
+  text-align: center;
+
+  > span {
+    font-weight: bold;
+  }
+`;
+
 export const CheckModal = styled.div`
   width: 100%;
   height: 100%;
@@ -157,52 +167,55 @@ export const CheckModal = styled.div`
 
   > div {
     margin-top: 40px;
-    display: flex;
-    justify-content: center;
 
-    > div.loadingWrapper {
+    > div {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
 
-      > p {
-        color: ${COLORS.serve3};
-      }
-    }
+      > div.loadingWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    img.loading {
-      width: 60px;
-      height: 60px;
-    }
-
-    button {
-      all: unset;
-      width: 200px;
-      height: 56px;
-      box-sizing: border-box;
-      cursor: pointer;
-      text-align: center;
-      border-radius: 2px;
-      color: #000;
-      -webkit-transition: 0.2s;
-      transition: 0.2s;
-
-      &.yes {
-        border: 1px solid ${COLORS.serve3};
-        margin-right: 30px;
-
-        &:hover {
-          background: ${COLORS.serve3};
-          color: #fff;
+        > p {
+          color: ${COLORS.serve3};
         }
       }
 
-      &.no {
-        border: 1px solid red;
+      img.loading {
+        width: 60px;
+        height: 60px;
+      }
 
-        &:hover {
-          background: red;
-          color: #fff;
+      button {
+        all: unset;
+        width: 200px;
+        height: 56px;
+        box-sizing: border-box;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 2px;
+        color: #000;
+        -webkit-transition: 0.2s;
+        transition: 0.2s;
+
+        &.yes {
+          border: 1px solid ${COLORS.serve3};
+          margin-right: 30px;
+
+          &:hover {
+            background: ${COLORS.serve3};
+            color: #fff;
+          }
+        }
+
+        &.no {
+          border: 1px solid red;
+
+          &:hover {
+            background: red;
+            color: #fff;
+          }
         }
       }
     }
