@@ -8,7 +8,7 @@ import {
 import { MapPhotos } from "middleware/api/apiTypes";
 
 interface InitialState {
-  mapPhotos: MapPhotos[];
+  mapPhotos: MapPhotos[] | null;
   getPhotoLoading: boolean;
   getMapPhotosStatus: number;
   putCropPhotoStatus: number;
@@ -16,7 +16,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   getMapPhotosStatus: 0,
-  mapPhotos: [],
+  mapPhotos: null,
   getPhotoLoading: false,
   putCropPhotoStatus: 0,
 };
