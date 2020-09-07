@@ -64,7 +64,7 @@ const SvgComponent: FC<OwnProps> = ({
   }, []);
 
   useEffect(() => {
-    if (mapPhotos.length > 0) {
+    if (mapPhotos?.length > 0) {
       push("/photomap");
     }
   }, [mapPhotos]);

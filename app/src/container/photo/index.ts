@@ -18,7 +18,7 @@ interface StoreProps {
   putCropPhotoStatus: number;
   getMapPhotoStatus: number;
   getPhotoLoading: boolean;
-  mapPhotos: MapPhotos[];
+  mapPhotos: MapPhotos[] | null;
 }
 
 export const usePhotoRedux = () => {
