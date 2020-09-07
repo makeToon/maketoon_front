@@ -23,6 +23,8 @@ export const putCropPhotoApi = async (payload: PutCropPhotoRequestType) => {
   formData.append("photo", payload.photo);
   formData.append("width", payload.width);
   formData.append("height", payload.height);
+  formData.append("imageWidth", payload.imageWidth);
+  formData.append("imageHeight", payload.imageHeight);
   formData.append("token", payload.accessToken);
 
   const response = await instanceAxios.put("/photo", formData, {

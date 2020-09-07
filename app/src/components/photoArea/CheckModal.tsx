@@ -41,14 +41,27 @@ const CheckModal: FC<OwnProps> = ({
   }, [isModalOpen]);
 
   const handleCropPhoto = useCallback(() => {
-    setIsLoading(true);
-    putCropPhoto({
-      accessToken,
-      photo,
-      area: area.split("-")[0],
-      width: area.split("-")[1],
-      height: area.split("-")[2],
+    const imageURL = URL.createObjectURL(photo);
+    const img = new Image();
+
+    img.addEventListener("load", () => {
+      const imageWidth = String(img.naturalWidth) || String(img.width);
+      const imageHeight = String(img.naturalHeight) || String(img.height);
+
+      setIsLoading(true);
+      putCropPhoto({
+        accessToken,
+        photo,
+        imageWidth,
+        imageHeight,
+        area: area.split("-")[0],
+        width: area.split("-")[1],
+        height: area.split("-")[2],
+      });
+      URL.revokeObjectURL(imageURL);
     });
+
+    img.src = imageURL;
   }, [accessToken, photo, area]);
 
   useEffect(() => {
