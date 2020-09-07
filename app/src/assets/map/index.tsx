@@ -44,8 +44,8 @@ const SvgComponent: FC<OwnProps> = ({
       if (imageHeight * convertSize > height) {
         return <image width={data.width} href={data.imgUrl} />;
       } else {
-        const ratioSize = width / height;
-        const ratioWidth = width * ratioSize;
+        const ratioWidth =
+          (width * height) / ((width / imageWidth) * imageHeight);
 
         return <image width={String(ratioWidth)} href={data.imgUrl} />;
       }

@@ -78,12 +78,7 @@ const CheckModal: FC<OwnProps> = ({
   }, [putCropPhotoStatus]);
 
   return (
-    <Modal
-      width="600px"
-      height="300px"
-      isOpen={isModalOpen}
-      setIsOpen={setIsModalOpen}
-    >
+    <Modal width="600px" height="300px" isOpen={isModalOpen}>
       <S.CheckModal>
         <h1>
           <span>"{area.split("-")[0]}"</span>에 해당 이미지를
