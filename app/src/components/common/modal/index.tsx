@@ -4,7 +4,7 @@ import * as S from "./style";
 
 export interface OwnProps {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  setIsOpen?: (isOpen: boolean) => void;
   width?: string;
   height?: string;
 }
@@ -17,10 +17,10 @@ export interface OwnProps {
 
 const Modal: FC<OwnProps> = ({
   isOpen,
-  setIsOpen,
+  setIsOpen = () => {},
   width,
   height,
-  children
+  children,
 }) => {
   const didMountRef = useRef(false);
 
@@ -59,7 +59,7 @@ const Modal: FC<OwnProps> = ({
       className="wrapper"
       onClick={setCloseHandler}
     >
-      <div onClick={e => e.stopPropagation()}>{children}</div>
+      <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </S.Wrapper>
   );
 };
