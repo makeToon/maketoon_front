@@ -14,6 +14,8 @@ export interface PutCropPhotoRequestType {
   area: string;
   width: string;
   height: string;
+  imageWidth: string;
+  imageHeight: string;
 }
 
 export interface MapPhotos {
@@ -21,6 +23,8 @@ export interface MapPhotos {
   width: string;
   height: string;
   imgUrl: string;
+  imageWidth: string;
+  imageHeight: string;
 }
 export type GetMapPhotosResponseType = MapPhotos[];
 

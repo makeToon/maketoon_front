@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import * as S from "./style";
 import { usePhotoRedux } from "container/photo";
+import { MapPhotos } from "middleware/api/apiTypes";
 
 interface OwnProps {
   fillColor: string;
@@ -31,6 +32,37 @@ const SvgComponent: FC<OwnProps> = ({
     []
   );
 
+  const createImage = useCallback((data: MapPhotos) => {
+    const width = Number(data.width);
+    const height = Number(data.height);
+    const imageWidth = Number(data.imageWidth);
+    const imageHeight = Number(data.imageHeight);
+
+    if (width > height) {
+      const convertSize = width / imageWidth;
+
+      if (imageHeight * convertSize > height) {
+        return <image width={data.width} href={data.imgUrl} />;
+      } else {
+        const ratioSize = width / height;
+        const ratioWidth = width * ratioSize;
+
+        return <image width={String(ratioWidth)} href={data.imgUrl} />;
+      }
+    } else {
+      const convertSize = height / imageHeight;
+
+      if (imageWidth * convertSize > width) {
+        return <image width={data.height} href={data.imgUrl} />;
+      } else {
+        const ratioSize = height / width;
+        const ratioHeight = height * ratioSize;
+
+        return <image width={String(ratioHeight)} href={data.imgUrl} />;
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (mapPhotos.length > 0) {
       push("/photomap");
@@ -40,7 +72,7 @@ const SvgComponent: FC<OwnProps> = ({
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        {mapPhotos?.map((d, i) => (
+        {mapPhotos?.map((d) => (
           <pattern
             key={d.area}
             id={`imgpattern_${d.area}`}
@@ -49,11 +81,7 @@ const SvgComponent: FC<OwnProps> = ({
             width="1"
             height="1"
           >
-            {Number(d.width) > Number(d.height) ? (
-              <image width={d.width} href={d.imgUrl} />
-            ) : (
-              <image height={d.height} href={d.imgUrl} />
-            )}
+            {createImage(d)}
           </pattern>
         ))}
       </defs>
